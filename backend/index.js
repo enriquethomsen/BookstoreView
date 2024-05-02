@@ -1,29 +1,28 @@
 import express from 'express';
-/* import { PORT, MONGO_URL } from './config.js'; */
 import mongoose from 'mongoose';
 import booksRoute from './routes/booksRoute.js';
 import cors from 'cors';
 
-const MONGO_URL = process.env.MONGO_URL || MONGO_URL
-
 const app = express();
-
+const MONGO_URL = process.env.MONGO_URL || MONGO_URL
 // Middleware for parsing request body
 app.use(express.json());
 
 // Middleware for handling CORS POLICY
-/* app.use(cors()); */
+// Option 1: Allow All Origins with Default of cors(*)
+app.use(cors());
+// Option 2: Allow Custom Origins
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//   })
+// );
 
-
-app.use(
- cors({
-     origin: "*",
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type'],
-  })
- );
-app.get("/", (req, res) => {
-  res.json({ data: "hello" });
+app.get('/', (request, response) => {
+  console.log(request);
+  return response.status(234).send('Welcome To MERN Stack Tutorial');
 });
 
 app.use('/books', booksRoute);
@@ -33,5 +32,3 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-module.exports = app;

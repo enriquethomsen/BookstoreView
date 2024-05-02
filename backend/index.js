@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const app = express();
 const MONGO_URL = process.env.MONGO_URL || MONGO_URL
-
+const PORT = process.env.PORT || PORT
 
 // Middleware for parsing request body
 app.use(express.json());

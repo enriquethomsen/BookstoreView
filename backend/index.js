@@ -4,8 +4,7 @@ import mongoose from 'mongoose';
 import booksRoute from './routes/booksRoute.js';
 import cors from 'cors';
 
-
-const MONGO_URL = MONGO_URL
+const MONGO_URL = process.env.MONGO_URL || MONGO_URL
 
 const app = express();
 
